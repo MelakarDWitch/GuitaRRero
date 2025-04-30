@@ -59,22 +59,23 @@
   <h1>Mini Guitar Hero</h1>
 
   <div class="game" id="game">
-    <div class="track" data-key="65">
+    <!-- codigo teclas D  68, F 70, J 74 K 75 -->
+    <div class="track" data-key="68">
       <div class="hit-zone"
         style="background-image: url(source/_img/teclaVerde1.png);background-repeat:no-repeat;background-size:100% 100%;">
       </div>
     </div>
-    <div class="track" data-key="83">
+    <div class="track" data-key="70">
       <div class="hit-zone" 
       style="background-image: url(source/_img/teclaVermelho1.png);background-repeat:no-repeat;background-size:100% 100%;">
     </div>
     </div>
-    <div class="track" data-key="68">
+    <div class="track" data-key="74">
       <div class="hit-zone" 
       style="background-image: url(source/_img/teclaAmarelo1.png);background-repeat:no-repeat;background-size:100% 100%;">
       </div>
     </div>
-    <div class="track" data-key="70">
+    <div class="track" data-key="75">
       <div class="hit-zone" 
       style="background-image: url(source/_img/teclaAzul1.png);background-repeat:no-repeat;background-size:100% 100%;">
       </div>
@@ -85,24 +86,24 @@
 
   <button id="start">começar</button>
 
-  <!-- Audio p música -->
+  <!--Audio p música -->
   <audio id="musica" src="" preload="auto"></audio>
 
   <script>
     //time
     const notes = [
-      { time: 1000, track: 65 },
-      { time: 1200, track: 65 },
-      { time: 1500, track: 65 },
-      { time: 1800, track: 83 },
-      { time: 1900, track: 68 },
+      { time: 1000, track: 68 },
+      { time: 1200, track: 68 },
+      { time: 1500, track: 68 },
+      { time: 1800, track: 74 },
+      { time: 1900, track: 75 },
       { time: 2200, track: 70 },
-      { time: 2400, track: 65 },
-      { time: 2600, track: 70 },
-      { time: 2900, track: 65 },
-      { time: 3100, track: 83 },
+      { time: 2400, track: 68 },
+      { time: 2600, track: 75 },
+      { time: 2900, track: 68 },
+      { time: 3100, track: 75 },
       { time: 3300, track: 68 },
-      { time: 3600, track: 70 },
+      { time: 3600, track: 75 },
       // aqui é para sincronizar a música
     ];
 
@@ -152,16 +153,16 @@
       // Efeito de "acerto" na zona(tipo uma piscada)OBS:essa bomba pisca só de clicar, não precisa acertar no timing.
       const hitZone = track.querySelector(".hit-zone");
       //Se tecla pressionada for a Verde
-      if (e.keyCode == "65") {
+      if (e.keyCode == "68") {
         hitZone.style = "background-image: url(source/_img/teclaVerde2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Amarelo 
-      else if (e.keyCode == "68") {
+      else if (e.keyCode == "74") {
         hitZone.style = "background-image: url(source/_img/teclaAmarelo2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Azul
-      else if (e.keyCode == "70") {
+      else if (e.keyCode == "75") {
         hitZone.style = "background-image: url(source/_img/teclaAzul2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Vermelho
-      else if (e.keyCode == "83") {
+      else if (e.keyCode == "70") {
         hitZone.style = "background-image: url(source/_img/teclaVermelho2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }
 
@@ -182,16 +183,16 @@
       const track = document.querySelector(`.track[data-key="${e.keyCode}"]`);
       const hitZone = track.querySelector(".hit-zone");
       //Se tecla pressionada for a Verde
-      if (e.keyCode == "65") {
+      if (e.keyCode == "68") {
         hitZone.style = "background-image: url(source/_img/teclaVerde1.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Amarelo 
-      else if (e.keyCode == "68") {
+      else if (e.keyCode == "74") {
         hitZone.style = "background-image: url(source/_img/teclaAmarelo1.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Azul
-      else if (e.keyCode == "70") {
+      else if (e.keyCode == "75") {
         hitZone.style = "background-image: url(source/_img/teclaAzul1.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Vermelho
-      else if (e.keyCode == "83") {
+      else if (e.keyCode == "70") {
         hitZone.style = "background-image: url(source/_img/teclaVermelho1.png);background-repeat:no-repeat;background-size:100% 100%;";
       }
     
