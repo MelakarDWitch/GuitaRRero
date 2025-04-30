@@ -58,6 +58,13 @@
         if (window.performance && performance.navigation.type === performance.navigation.TYPE_RELOAD) {
             window.location.href = "home.html";
         }
+
+        document.addEventListener("keydown", e => {
+            const trilha = document.querySelector(`.trilha[id="${e.keyCode}"]`)
+            if(!trilha)return;
+            
+
+        });
     </script>
 
 </body>

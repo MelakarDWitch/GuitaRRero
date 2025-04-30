@@ -39,8 +39,7 @@
     }
 
     .hit-zone {
-      height: 30px;
-      background: rgba(4, 238, 23, 0.2);
+      height: 50px;
       position: absolute;
       bottom: 0;
       width: 100%;
@@ -61,16 +60,24 @@
 
   <div class="game" id="game">
     <div class="track" data-key="65">
-      <div class="hit-zone"></div>
+      <div class="hit-zone"
+        style="background-image: url(source/_img/teclaVerde1.png);background-repeat:no-repeat;background-size:100% 100%;">
+      </div>
     </div>
     <div class="track" data-key="83">
-      <div class="hit-zone"></div>
+      <div class="hit-zone" 
+      style="background-image: url(source/_img/teclaVermelho1.png);background-repeat:no-repeat;background-size:100% 100%;">
+    </div>
     </div>
     <div class="track" data-key="68">
-      <div class="hit-zone"></div>
+      <div class="hit-zone" 
+      style="background-image: url(source/_img/teclaAmarelo1.png);background-repeat:no-repeat;background-size:100% 100%;">
+      </div>
     </div>
     <div class="track" data-key="70">
-      <div class="hit-zone"></div>
+      <div class="hit-zone" 
+      style="background-image: url(source/_img/teclaAzul1.png);background-repeat:no-repeat;background-size:100% 100%;">
+      </div>
     </div>
   </div>
 
@@ -107,7 +114,7 @@
     function spawnNote(note) {
       const track = document.querySelector(`.track[data-key="${note.track}"]`);
       if (!track) return;
-      
+
       const el = document.createElement("div");
       el.classList.add("note");
       track.appendChild(el);
@@ -144,10 +151,21 @@
 
       // Efeito de "acerto" na zona(tipo uma piscada)OBS:essa bomba pisca só de clicar, não precisa acertar no timing.
       const hitZone = track.querySelector(".hit-zone");
-      hitZone.style.background = "rgba(0,255,0,0.7)";
-      setTimeout(() => {
-        hitZone.style.background = "rgba(4, 238, 23, 0.2)";
-      }, 100);
+      //Se tecla pressionada for a Verde
+      if (e.keyCode == "65") {
+        hitZone.style = "background-image: url(source/_img/teclaVerde2.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }//Se tecla pressionada for a Amarelo 
+      else if (e.keyCode == "68") {
+        hitZone.style = "background-image: url(source/_img/teclaAmarelo2.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }//Se tecla pressionada for a Azul
+      else if (e.keyCode == "70") {
+        hitZone.style = "background-image: url(source/_img/teclaAzul2.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }//Se tecla pressionada for a Vermelho
+      else if (e.keyCode == "83") {
+        hitZone.style = "background-image: url(source/_img/teclaVermelho2.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }
+
+
 
       // Verificar se acertou a nota
       const notesOnTrack = track.querySelectorAll(".note");
@@ -159,6 +177,25 @@
           document.getElementById("score").textContent = `Pontuação: ${score}`;
         }
       });
+    });
+    document.addEventListener("keyup", e => {
+      const track = document.querySelector(`.track[data-key="${e.keyCode}"]`);
+      const hitZone = track.querySelector(".hit-zone");
+      //Se tecla pressionada for a Verde
+      if (e.keyCode == "65") {
+        hitZone.style = "background-image: url(source/_img/teclaVerde1.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }//Se tecla pressionada for a Amarelo 
+      else if (e.keyCode == "68") {
+        hitZone.style = "background-image: url(source/_img/teclaAmarelo1.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }//Se tecla pressionada for a Azul
+      else if (e.keyCode == "70") {
+        hitZone.style = "background-image: url(source/_img/teclaAzul1.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }//Se tecla pressionada for a Vermelho
+      else if (e.keyCode == "83") {
+        hitZone.style = "background-image: url(source/_img/teclaVermelho1.png);background-repeat:no-repeat;background-size:100% 100%;";
+      }
+    
+    
     });
   </script>
 
