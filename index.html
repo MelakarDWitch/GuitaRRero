@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,40 +11,55 @@
 
 
 </head>
+
 <body>
+
     <div class="trilha" id="verde"></div>
     <div class="trilha" id="vermelho"></div>
     <div class="trilha" id="amarelo"></div>
     <div class="trilha" id="azul"></div>
     <style>
-        body, html{
-        margin: 0px;
-        padding: 0px;
-        border: 0px;
+        body,
+        html {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
         }
-        .trilha{
+
+        .trilha {
             position: absolute;
             width: 150px;
             height: 100%;
         }
-        #verde{
-            left:25%;
+
+        #verde {
+            left: 25%;
             border: 5px solid green;
         }
-        #vermelho{
-            left:35%;
+
+        #vermelho {
+            left: 35%;
             border: 5px solid red;
         }
-        #amarelo{
-            left:45%;
-            border:5px solid yellow;
-        }
-        #azul{
-            left:55%;
-            border: 5px solid blue;
+
+        #amarelo {
+            left: 45%;
+            border: 5px solid yellow;
         }
 
+        #azul {
+            left: 55%;
+            border: 5px solid blue;
+        }
     </style>
     <!----<a href="ola.html"><button type="button" >olar</button></a>--->
+    <script>
+        //Redireciona caso a janela seja recarregada repentinamente
+        if (window.performance && performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+            window.location.href = "home.html";
+        }
+    </script>
+
 </body>
+
 </html>
