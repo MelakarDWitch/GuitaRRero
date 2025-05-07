@@ -7,32 +7,67 @@
     <title>GuitaRRero</title>
     <script src="js/phaser.js"></script>
     <script type="module" src="js/main.js"></script>
-
-
-
 </head>
 
 <body>
+    <div class="trilha" id="verde" data-key="68">
+        <div class="hit-zone" style="background-image: url(source/_img/teclaVerde1.png);background-repeat: no-repeat;background-size: 100% 100%;">
+        </div>
+    </div>
+    <div class="trilha" id="vermelho" data-key="70">
+        <div class="hit-zone" style="background-image: url(source/_img/teclaVermelho1.png);background-repeat: no-repeat;background-size: 100% 100%;"></div>
+    </div>
+    <div class="trilha" id="amarelo" data-key="74">
+        <div class="hit-zone" style="background-image: url(source/_img/teclaAmarelo1.png);background-repeat: no-repeat;background-size: 100% 100%;"></div>
+    </div>
+    <div class="trilha" id="azul" data-key="75">
+        <div class="hit-zone" style="background-image: url(source/_img/teclaAzul1.png);background-repeat: no-repeat;background-size: 100% 100%;"></div>
+    </div>
+    <div id="phaser-container"></div>
 
-    <div class="trilha" id="verde"></div>
-    <div class="trilha" id="vermelho"></div>
-    <div class="trilha" id="amarelo"></div>
-    <div class="trilha" id="azul"></div>
-    
+    <img class="letras" src="source/_img/teclaD.png">
+    <img class="letras" src="source/_img/teclaF.png">
+    <img class="letras" src="source/_img/teclaJ.png">
+    <img class="letras" src="source/_img/teclaK.png">
+    <p id="score">Pontuação: 0</p>
+
+
+
     <style>
+        #phaser-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hit-zone {
+            height: 100px;
+            position: absolute;
+            
+            bottom: 0;
+            width: 100%;
+        }
+
         body,
         html {
+            background-image: url('source/_img/estudio.png');
+            background-repeat: no-repeat;
+            background-size: cover;
             margin: 0px;
             padding: 0px;
             border: 0px;
         }
 
         .trilha {
+            background: #585858;
+            width: 120px;
+            height: 80%;
             position: absolute;
-            width: 150px;
-            height: 100%;
+            border: 2px solid #444;
         }
-
+        
         #verde {
             left: 25%;
             border: 5px solid green;
@@ -52,17 +87,27 @@
             left: 55%;
             border: 5px solid blue;
         }
-    </style>
-    <!----<a href="ola.html"><button type="button" >olar</button></a>--->
-    <script>
-        //Redireciona caso a janela seja recarregada repentinamente
-        if (window.performance && performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-            window.location.href = "home.html";
+
+        .letras {
+            margin-top: 10px;
+            width: 40px;
+            height: 40px;
+            margin-left: 25px;
+            margin-right: 25px;
         }
+    </style>
+    <!---- <a href="ola.html"><button type="button" >olar</button></a>--->
+    <script>
+        //!!!!!!! DESCOMENTAR DEPOIS DE TERMINAR DE TESTAR!!!
+        //Redireciona caso a janela seja recarregada repentinamente
+        //if (window.performance && performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+        //    window.location.href = "home.html";
+        //}
+        //!!!!!!! DESCOMENTAR DEPOIS DE TERMINAR DE TESTAR!!!
 
         document.addEventListener("keydown", e => {
             const trilha = document.querySelector(`.trilha[id="${e.keyCode}"]`)
-            if(!trilha)return;
+            if (!trilha) return;
 
 
         });

@@ -1,9 +1,11 @@
-//TODO: CRIAR PAGINA INICIAL PARA MENU COM BOTAO Q TROCA DE SCENE 
-///E POR CONSEQUENCIA RESOLVE O AUDIO NO CHROME 
+// TODO: ajustar tamanho do jogo conforme tamanho tela 
+//vetores como solução ´para propblema de colisão? colocar os botoes dentro de um vetor
 
 /// 0 = nao spawm nota,
 //  1 = spawna nota
 // Verde, vermelho, Amarelo, Azul
+primeiro numero esta em milezimos de segundo
+
 
 
 

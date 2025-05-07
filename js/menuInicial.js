@@ -7,12 +7,12 @@ export default class menuInicial extends Phaser.Scene {
     }
     preload() {
         //map tiles
-        this.load.image('studio', 'source/_img/estudio.png');
         //teclas, discos musica, imagem backgroundssss, ICONES,
         Botoes.preload(this);
-        this.load.audio('musica', 'source/musicas/Coasting.mp3')
+        this.load.audio('musica', 'source/musicas/Coasting.mp3');
         //this.load.image('fundoDaImagem','source/_img/estudio.');
         this.load.json('beatmap', 'js/objetos/mapaMusicaTeste.json');
+        this.load.image('teste', 'source/_img/discoVerde.png');
     }
     spawnNota(notas) {
         const notasSplit = notas.split(",");
@@ -32,8 +32,7 @@ export default class menuInicial extends Phaser.Scene {
 
     }
     create() {
-        this.image = this.add.image(800, 430, 'studio');
-        this.image.setScale(1.0);
+
         //x = largura y = altura(x, y)
         this.spawnerVermelho = new Botoes(this);
         this.spawnerVerde = new Botoes(this);
@@ -59,19 +58,82 @@ export default class menuInicial extends Phaser.Scene {
             musica.play({
                 loop: true,
                 volume: 1,
-                delay: 0
+                delay: 4
             });
         });
-        // TODO: se clicar fora pausar o jogo e música
-        // TODO: se der F5 retornar ao home.html
+        // TODO:     se clicar fora pausar o jogo e música
+        // FEITO: se der F5 retornar ao home.html
+
+        this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        this.keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+        this.keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+
+        //Posição central das hit-zones
+        const posXVerde = document.querySelector("#verde > .hit-zone");
+        var rect = posXVerde.getBoundingClientRect();
+        this.xVerde = (rect.left + (rect.right - rect.left) / 2);
+
+        const posXVermelho = document.querySelector("#vermelho > .hit-zone");
+        rect = posXVermelho.getBoundingClientRect();
+        this.xVermelho = (rect.left + (rect.right - rect.left) / 2);
+
+        const posXAmarelo = document.querySelector("#amarelo > .hit-zone");
+        rect = posXAmarelo.getBoundingClientRect();
+        this.xAmarelo = (rect.left + (rect.right - rect.left) / 2);
+
+        const posXAzul = document.querySelector("#azul >  .hit-zone");
+        rect = posXAzul.getBoundingClientRect();
+        this.xAzul = (rect.left + (rect.right - rect.left) / 2);
+
+        this.add.image(this.xVerde, 720, 'teste');
+
+
+
     }
 
 
     update() {
-        this.spawnerVermelho.update();
+
         this.spawnerVerde.update();
+        this.spawnerVermelho.update();
         this.spawnerAmarelo.update();
         this.spawnerAzul.update();
+
+        if (this.keyD.isDown) {
+            //xVerde
+            //const distancia = Phaser.Math.Distance.Between(objeto.x, objeto.y, pontoX, pontoY);
+
+            //this.spawnerVerde
+            //this.position.body
+            const donutVerde = this.spawnerVerde.donut;
+
+            // Certifica-se que o donut existe (foi spawnado)
+            if (donutVerde) {
+                const distancia = Phaser.Math.Distance.Between(donutVerde.x, donutVerde.y, this.xVerde, 720);
+
+                if (distancia < 50) { // 50 px é o raio de tolerância, você pode ajustar
+                    console.log("Donut VERDE está próximo da hit-zone!", distancia);
+                    // Deleta o donut
+                    donutVerde.destroy();
+                    this.spawnerVerde.donut = null;
+                } else {
+                    console.log("Donut VERDE está longe da hit-zone...", distancia);
+                }
+            }
+        }
+
+        if (this.keyF.isDown) {
+            //xVermelho
+        }
+
+        if (this.keyJ.isDown) {
+            //xAmarelo
+        }
+        if (this.keyK.isDown) {
+            //xAzul
+        }
+
     }
 
 

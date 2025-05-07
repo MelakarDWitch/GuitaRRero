@@ -25,8 +25,8 @@ export default class Botoes extends Phaser.Physics.Arcade.Sprite {
 
         //essa parte de ERA baixo é a que faz a nota spawnar em lugar aleatório
 
-        const posXVerde = document.getElementById(cor);
-        const rect = posXVerde.getBoundingClientRect();
+        const posX = document.getElementById(cor);
+        const rect = posX.getBoundingClientRect();
 
         //const x = Phaser.Math.Between(200, 1000); 
                         
