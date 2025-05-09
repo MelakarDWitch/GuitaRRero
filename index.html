@@ -29,11 +29,12 @@
     <img class="letras" src="source/_img/teclaF.png">
     <img class="letras" src="source/_img/teclaJ.png">
     <img class="letras" src="source/_img/teclaK.png">
-    <p id="score">Pontuação: 0</p>
+    <p style="font-size: 40px;">Pontuação: <div id="score" style="font-size: 40px;">0</div></p>
 
 
 
     <style>
+        
         #phaser-container {
             position: absolute;
             top: 0;
@@ -41,9 +42,9 @@
             width: 100%;
             height: 100%;
         }
-
+        
         .hit-zone {
-            height: 100px;
+            height:126px;
             position: absolute;
             
             bottom: 0;
@@ -63,28 +64,28 @@
         .trilha {
             background: #585858;
             width: 120px;
-            height: 80%;
+            height: 800px;
             position: absolute;
             border: 2px solid #444;
         }
         
         #verde {
-            left: 25%;
+            left: 700px;
             border: 5px solid green;
         }
 
         #vermelho {
-            left: 35%;
+            left: 850px;
             border: 5px solid red;
         }
 
         #amarelo {
-            left: 45%;
+            left: 1000px;
             border: 5px solid yellow;
         }
 
         #azul {
-            left: 55%;
+            left: 1150px;
             border: 5px solid blue;
         }
 
@@ -100,11 +101,12 @@
     <script>
         //!!!!!!! DESCOMENTAR DEPOIS DE TERMINAR DE TESTAR!!!
         //Redireciona caso a janela seja recarregada repentinamente
-        //if (window.performance && performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-        //    window.location.href = "home.html";
-        //}
+        if (window.performance && performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+            window.location.href = "home.html";
+        }
         //!!!!!!! DESCOMENTAR DEPOIS DE TERMINAR DE TESTAR!!!
-
+        let scoreRef = document.getElementById("score");
+        let score = parseInt(scoreRef.innerHTML);
         document.addEventListener("keydown", e => {
             const trilha = document.querySelector(`.trilha[id="${e.keyCode}"]`)
             if (!trilha) return;

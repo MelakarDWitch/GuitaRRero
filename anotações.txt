@@ -7,7 +7,13 @@
 primeiro numero esta em milezimos de segundo
 
 
-
+implementar de todas as teclas em MenuInicial.js;
+// Certifica-se que o donut existe (foi spawnado)
+            if (donutVerde) {
+                const distancia = Phaser.Math.Distance.Between(donutVerde.x, donutVerde.y, this.xVerde, 737);
+                //Se a
+                if (distancia <= 50) {
+                    // Deleta o donut
 
 musicas:
     Coasting - Darren Korb;

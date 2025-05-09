@@ -4,17 +4,17 @@ export default class Botoes extends Phaser.Physics.Arcade.Sprite {
         this.scene = scene;
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.donut;
+        this.donut = [];
     }
 
     static preload(scene) {
-        scene.load.image('botaovermelho', 'source/_img/botaovermelho.png');
+        scene.load.image('botaovermelho', 'source/_img/teclaVermelho2.png');
 
-        scene.load.image('botaoverde', 'source/_img/botaoverde.png');
+        scene.load.image('botaoverde', 'source/_img/teclaVerde2.png');
 
-        scene.load.image('botaoamarelo', 'source/_img/botaoamarelo.png');
+        scene.load.image('botaoamarelo', 'source/_img/teclaAmarelo2.png');
 
-        scene.load.image('botaoazul', 'source/_img/botaoazul.png');
+        scene.load.image('botaoazul', 'source/_img/teclaAzul2.png');
 
     }
 
@@ -35,19 +35,18 @@ export default class Botoes extends Phaser.Physics.Arcade.Sprite {
         const y = 100;
 
         if (cor == "vermelho") {
-            this.donut = this.scene.physics.add.image(x, y, 'botaovermelho').setScale(0.50);
+            this.donut.push(this.scene.physics.add.image(x+5, y, 'botaovermelho').setScale(6).setVelocityY(400, 10));
             
         }
         else if (cor == "verde") {
-            this.donut = this.scene.physics.add.image(x, y, 'botaoverde').setScale(0.50);
+            this.donut.push(this.scene.physics.add.image(x+5, y, 'botaoverde').setScale(6).setVelocityY(400, 10));
         }
         else if (cor == "amarelo") {
-            this.donut = this.scene.physics.add.image(x, y, 'botaoamarelo').setScale(0.50);
+            this.donut.push(this.scene.physics.add.image(x+5, y, 'botaoamarelo').setScale(6).setVelocityY(400, 10))
         }
         else if (cor == "azul") {
-            this.donut = this.scene.physics.add.image(x, y, 'botaoazul').setScale(0.50);
+            this.donut.push(this.scene.physics.add.image(x+5, y, 'botaoazul').setScale(6).setVelocityY(400, 10));
         }
-        this.donut.setVelocityY(200, 10);
     }
 
     update() {
