@@ -9,7 +9,7 @@ const config = {
     height: window.innerHeight,
     transparent: true,
     physics:{
-        //FEITOOOOO POHA: TIRA O BOTAO VERDEPIOR
+        
         default: 'arcade',
         arcade:{
             debug:true,

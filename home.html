@@ -5,13 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+</head> 
 
 <body>
+    <img id="titulo" src="source/_img/titulo.png">
     <div id="buttonContainer">
         <a href="index.html"><button id="botaoIniciar" onclick="IniciarJogo()"></button></a>
         <button id="botaoConfiguracoes"></button>
         <button id="botaoCreditos"> <img src="source/_img/saida.png"> </button>
+        <a href="beatmapForm.html"><button id="BeatmapForm"> <img src=""> </button></a>
     </div>
     <style>
         html {
@@ -57,6 +59,13 @@
 
         img {
             height: 100px;
+        }
+        #titulo{
+            position: fixed;
+            margin-top: 50px;
+            margin-left: 150px;
+            width: 20%;
+            height: 20%;
         }
     </style>
     

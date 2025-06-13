@@ -1,111 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+import * as fs from "fs";
+export default class olaScript extends Phaser.Physics.Arcade.Sprite
+{
 
-<head>
-  <meta charset="UTF-8">
-  <script type="module" src=" "></script>
-  <title>Mini Guitar Hero</title>
-  <style>
-    body {
-      margin: 0;
-      background: #111;
-      color: white;
-      font-family: sans-serif;
-      overflow: hidden;
-      text-align: center;
-    }
 
-    .game {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 50px;
-    }
-
-    .track {
-      background: #222;
-      width: 80px;
-      height: 500px;
-      position: relative;
-      border: 2px solid #444;
-    }
-
-    .note {
-      width: 100%;
-      height: 80px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-image: url("source/_img/teclaAzul2.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
-    .hit-zone {
-      height: 50px;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-    }
-
-    #start {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .letras {
-      margin-top: 10px;
-      width: 40px;
-      height: 40px;
-      margin-left: 25px;
-      margin-right: 25px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <h1>Mini Guitar Hero</h1>
-
-  <div class="game" id="game">
-    <!-- codigo teclas D  68, F 70, J 74 K 75 -->
-    <div class="track" data-key="68">
-      <div class="hit-zone"
-        style="background-image: url(source/_img/teclaVerde1.png);background-repeat:no-repeat;background-size:100% 100%;">
-      </div>
-    </div>
-
-    <div class="track" data-key="70">
-      <div class="hit-zone"
-        style="background-image: url(source/_img/teclaVermelho1.png);background-repeat:no-repeat;background-size:100% 100%;">
-      </div>
-    </div>
-    <div class="track" data-key="74">
-      <div class="hit-zone"
-        style="background-image: url(source/_img/teclaAmarelo1.png);background-repeat:no-repeat;background-size:100% 100%;">
-      </div>
-    </div>
-    <div class="track" data-key="75">
-      <div class="hit-zone"
-        style="background-image: url(source/_img/teclaAzul1.png);background-repeat:no-repeat;background-size:100% 100%;">
-      </div>
-    </div>
-  </div>
-  <img class="letras" src="source/_img/teclaD.png">
-  <img class="letras" src="source/_img/teclaF.png">
-  <img class="letras" src="source/_img/teclaJ.png">
-  <img class="letras" src="source/_img/teclaK.png">
-  <p id="score">Pontuação: 0</p>
-
-  <button id="start">começar</button>
-
-  <!--Audio p música -->
-  <audio id="musica" src="source/musicas/Coasting.mp3" preload="auto"></audio>
-
-  <script>
-    import * as fs from "fs";
+ 
     var startTime = Date.now();
     //time
     const notes = [
@@ -167,22 +65,22 @@
     }
     // Apertar teclas
     document.addEventListener("keydown", e => {
-      const track = document.querySelector(`.track[data-key="${e.keyCode}"]`);
+      const track = document.querySelector(`.track[data-key="${e.}"]`);
       if (!track) return;
 
       // Efeito de "acerto" na zona(tipo uma piscada)OBS:essa bomba pisca só de clicar, não precisa acertar no timing.
       const hitZone = track.querySelector(".hit-zone");
       //Se tecla pressionada for a Verde
-      if (e.keyCode == "68") {
+      if (e.keyD == "68") {
         hitZone.style = "background-image: url(source/_img/teclaVerde2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Amarelo 
-      else if (e.keyCode == "74") {
+      else if (e.keyJ == "74") {
         hitZone.style = "background-image: url(source/_img/teclaAmarelo2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Azul
-      else if (e.keyCode == "75") {
+      else if (e.keyK == "75") {
         hitZone.style = "background-image: url(source/_img/teclaAzul2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }//Se tecla pressionada for a Vermelho
-      else if (e.keyCode == "70") {
+      else if (e.keyF == "70") {
         hitZone.style = "background-image: url(source/_img/teclaVermelho2.png);background-repeat:no-repeat;background-size:100% 100%;";
       }
 
@@ -244,10 +142,4 @@
     );
 
 
-
-
-  </script>
-
-</body>
-
-</html>
+ }

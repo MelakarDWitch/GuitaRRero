@@ -1,5 +1,7 @@
+SEXTA FEIRA HTML GET ELEMENT PRA FAZER O PAUSE DO jogo
+
 // TODO: ajustar tamanho do jogo conforme tamanho tela 
-//vetores como solução ´para propblema de colisão? colocar os botoes dentro de um vetor
+//vetores como solução ´para problema de colisão? colocar os botoes dentro de um vetor
 
 /// 0 = nao spawm nota,
 //  1 = spawna nota

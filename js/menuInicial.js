@@ -4,6 +4,8 @@ import Botoes from './botoes.js';
 export default class menuInicial extends Phaser.Scene {
     constructor() {
         super('menuInicial')
+        this.musica;
+        this.contagemErrosAcertos = 0;
     }
     preload() {
         //map tiles
@@ -11,8 +13,10 @@ export default class menuInicial extends Phaser.Scene {
         Botoes.preload(this);
         this.load.audio('musica', 'source/musicas/Coasting.mp3');
         //this.load.image('fundoDaImagem','source/_img/estudio.');
-        this.load.json('beatmap', 'js/objetos/mapaMusicaTeste.json');
+        this.load.json('beatmap', 'js/objetos/coasting2.json');
         this.load.image('teste', 'source/_img/discoVerde.png');
+        //this.load.image('gameover', 'source/_img/gameover.png');
+       
     }
     spawnNota(notas) {
         const notasSplit = notas.split(",");
@@ -31,6 +35,63 @@ export default class menuInicial extends Phaser.Scene {
         }
 
     }
+    
+    verificaPalheta(){
+        let contagemErros = this.missCount[3] + this.missCount[2] + this.missCount[1] + this.missCount[0] - this.contagemErrosAcertos;
+        let palhetaRef = document.getElementById("palheta");
+        console.log(contagemErros)
+        if(contagemErros<0){
+            //mander o numero em 0 e nao ficar negativo
+           contagemErros = 0;
+           this.contagemErrosAcertos = this.missCount[3] + this.missCount[2] + this.missCount[1] + this.missCount[0];
+            
+        }
+        if(contagemErros==0){
+            //mudar palheta para a inteira
+            
+            palhetaRef.innerHTML = '<img src="source/_img/palhetaInteira.png">';
+            
+        }
+        if(contagemErros>=1 && contagemErros<=3){
+            //mudar palheta quebrada 1
+             palhetaRef.innerHTML = '<img src="source/_img/palheta1.png">'; 
+            }
+        if(contagemErros>=4 && contagemErros<=6){
+            //mudar palheta quebrada 2
+        
+            palhetaRef.innerHTML = '<img src="source/_img/palheta2.png">';
+        
+        }
+        if(contagemErros>=7 && contagemErros<=9){
+            //mudar palheta quebrada 3
+        
+            palhetaRef.innerHTML = '<img src="source/_img/palheta3.png">';
+        
+        }
+        if(contagemErros>=10 && contagemErros<=12){
+            //mudar palheta quebrada 4
+        
+            palhetaRef.innerHTML = '<img src="source/_img/palheta4.png">';
+
+        }
+        if(contagemErros>=13 && contagemErros<=16){
+            //mudar palheta quebrada 5
+        
+            palhetaRef.innerHTML = '<img src="source/_img/palheta5.png">';
+        
+        }
+
+        if(contagemErros >=17){
+           
+            //pausar jogo e mostrar tela de derrota
+            let gameover = document.getElementById("gameover");
+            gameover.style = "display:block";
+            this.scene.pause();
+            this.musica.stop();    
+        }
+        
+        
+    }
     create() {
 
         //x = largura y = altura(x, y)
@@ -45,20 +106,21 @@ export default class menuInicial extends Phaser.Scene {
         for (var i = 0; i < coastingBeatmap.length; i++) {
             const timeMusic = parseInt(coastingBeatmap[i][0]);
             this.time.addEvent({
-                delay: timeMusic + 1200, // tempo em milissegundos (1 segundo)
+                delay: timeMusic, // tempo em milissegundos (1 segundo)
                 callback: this.spawnNota.bind(this, coastingBeatmap[i][1]), // função a ser chamada
                 callbackScope: this, // escopo da função (geralmente a cena atual)
                 loop: false // se o evento deve repetir indefinidamente
             });
         }
 
+        this.musica = this.sound.add('musica');
         // Executa algo no próximo frame
         this.time.delayedCall(2, () => {
-            const musica = this.sound.add('musica');
-            musica.play({
+            
+            this.musica.play({
                 loop: true,
                 volume: 1,
-                delay: 2.5
+                delay: 1.8
             });
         });
         // TODO:     se clicar fora pausar o jogo e música
@@ -89,18 +151,25 @@ export default class menuInicial extends Phaser.Scene {
         //this.add.image(this.xVerde, 737, 'teste');
         this.missCount = [0, 0, 0, 0];
     }
-
+    
+        
+    
 
     update() {
+
+        
 
         this.spawnerVerde.update();
         this.spawnerVermelho.update();
         this.spawnerAmarelo.update();
         this.spawnerAzul.update();
 
+        //EM CASO DE ERRO DA TECLA
         if (this.spawnerVerde.donut[this.missCount[0]] && this.spawnerVerde.donut[this.missCount[0]].y > 863) {
             this.spawnerVerde.donut[this.missCount[0]].destroy()
             this.missCount[0]++;
+
+
         }
         if (this.spawnerVermelho.donut[this.missCount[1]] && this.spawnerVermelho.donut[this.missCount[1]].y > 863) {
             this.spawnerVermelho.donut[this.missCount[1]].destroy()
@@ -114,34 +183,44 @@ export default class menuInicial extends Phaser.Scene {
             this.spawnerAzul.donut[this.missCount[3]].destroy()
             this.missCount[3]++;
         }
-        
+        this.verificaPalheta();
+
         //Verde
-        if (this.keyD.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(this.keyD)) {
             this.posXVerde.style = "background-image: url(source/_img/teclaVerde3.png);background-repeat:no-repeat;background-size:100% 100%;";
 
             const donutVerde = this.spawnerVerde.donut[this.missCount[0]];
             // Certifica-se que o donut existe (foi spawnado)
             if (donutVerde) {
+
                 const distanciaVerde = Phaser.Math.Distance.Between(donutVerde.x, donutVerde.y, this.xVerde, 737);
                 //Se a
-                if (distanciaVerde <= 50) {
+                if (distanciaVerde <= 80) {
+                    
                     // Deleta o donut
                     this.spawnerVerde.donut[this.missCount[0]].destroy()
                     this.spawnerVerde.donut.splice(this.missCount[0], 1)
 
-                    if (distanciaVerde > 30 && distanciaVerde <= 50) { // 50 px é o raio de tolerância, você pode ajustar
+                    if (distanciaVerde > 50 && distanciaVerde <= 80) { // 50 px é o raio de tolerância, você pode ajustar
                         score = score + 10;
-                    } else if (distanciaVerde > 10 && distanciaVerde <= 30) {
+                    } else if (distanciaVerde > 30 && distanciaVerde <= 50) {
                         score = score + 30;
-                    } else if (distanciaVerde <= 10) {
+                        this.contagemErrosAcertos++;
+
+                    } else if (distanciaVerde <= 30) {
                         score = score + 50;
+                        this.contagemErrosAcertos++;
                     }
                     scoreRef.innerHTML = score;
                 }
             }
         }
-        //Vermelho
-        if (this.keyF.isDown) {
+        if (Phaser.Input.Keyboard.JustUp(this.keyD)) {
+            this.posXVerde.style = "background-image: url(source/_img/teclaVerde1.png);background-repeat:no-repeat;background-size:100% 100%;";
+
+        }
+        //Vermelho. F
+        if (Phaser.Input.Keyboard.JustDown(this.keyF)) {
             this.posXVermelho.style = "background-image: url(source/_img/teclaVermelho3.png);background-repeat:no-repeat;background-size:100% 100%;";
             const donutVermelho = this.spawnerVermelho.donut[this.missCount[1]];
             if (donutVermelho) {
@@ -151,17 +230,25 @@ export default class menuInicial extends Phaser.Scene {
                     this.spawnerVermelho.donut.splice(this.missCount[1], 1)
                     if (distanciaVermelha > 30 && distanciaVermelha <= 50) {
                         score = score + 10;
+
                     } else if (distanciaVermelha > 10 && distanciaVermelha <= 30) {
                         score = score + 30;
+                        this.contagemErrosAcertos++;
                     } else if (distanciaVermelha <= 10) {
                         score = score + 50;
+                        this.contagemErrosAcertos++;
                     }
                     scoreRef.innerHTML = score;
                 }
             }
         }
-        //Amarelo
-        if (this.keyJ.isDown) {
+        if (Phaser.Input.Keyboard.JustUp(this.keyF)) {
+            this.posXVermelho.style = "background-image: url(source/_img/teclaVermelho1.png);background-repeat:no-repeat;background-size:100% 100%;";
+
+        }
+
+        //Amarelo.J
+        if (Phaser.Input.Keyboard.JustDown(this.keyJ)) {
             this.posXAmarelo.style = "background-image: url(source/_img/teclaAmarelo3.png);background-repeat:no-repeat;background-size:100% 100%;";
             const donutAmarelo = this.spawnerAmarelo.donut[this.missCount[2]];
             if (donutAmarelo) {
@@ -173,17 +260,21 @@ export default class menuInicial extends Phaser.Scene {
                         score = score + 10;
                     } else if (distanciaAmarelo > 10 && distanciaAmarelo <= 30) {
                         score = score + 30;
+                        this.contagemErrosAcertos++;
                     } else if (distanciaAmarelo <= 10) {
                         score = score + 50;
+                        this.contagemErrosAcertos++;
                     }
                     scoreRef.innerHTML = score;
                 }
             }
+        } if (Phaser.Input.Keyboard.JustUp(this.keyJ)) {
+            this.posXAmarelo.style = "background-image: url(source/_img/teclaAmarelo1.png);background-repeat:no-repeat;background-size:100% 100%;";
+
         }
-        //Azul
-        if (this.keyK.isDown) {
+        //Azul.K
+        if (Phaser.Input.Keyboard.JustDown(this.keyK)) {
             this.posXAzul.style = "background-image: url(source/_img/teclaAzul3.png);background-repeat:no-repeat;background-size:100% 100%;";
-            
             const donutAzul = this.spawnerAzul.donut[this.missCount[3]];
             if (donutAzul) {
                 const distanciaAzul = Phaser.Math.Distance.Between(donutAzul.x, donutAzul.y, this.xAzul, 737);
@@ -194,14 +285,20 @@ export default class menuInicial extends Phaser.Scene {
                         score = score + 10;
                     } else if (distanciaAzul > 10 && distanciaAzul <= 30) {
                         score = score + 30;
+                        this.contagemErrosAcertos++;
                     } else if (distanciaAzul <= 10) {
                         score = score + 50;
+                        this.contagemErrosAcertos++;
                     }
                     scoreRef.innerHTML = score;
                 }
             }
-        
+            
         }
-        
+        if (Phaser.Input.Keyboard.JustUp(this.keyK)) {
+            this.posXAzul.style = "background-image: url(source/_img/teclaAzul1.png);background-repeat:no-repeat;background-size:100% 100%;";
+
+
+        }
     }
 }
