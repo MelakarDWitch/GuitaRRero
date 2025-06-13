@@ -1,11 +1,21 @@
-//TODO: CRIAR PAGINA INICIAL PARA MENU COM BOTAO Q TROCA DE SCENE 
-///E POR CONSEQUENCIA RESOLVE O AUDIO NO CHROME 
+SEXTA FEIRA HTML GET ELEMENT PRA FAZER O PAUSE DO jogo
+
+// TODO: ajustar tamanho do jogo conforme tamanho tela 
+//vetores como solução ´para problema de colisão? colocar os botoes dentro de um vetor
 
 /// 0 = nao spawm nota,
 //  1 = spawna nota
 // Verde, vermelho, Amarelo, Azul
+primeiro numero esta em milezimos de segundo
 
 
+implementar de todas as teclas em MenuInicial.js;
+// Certifica-se que o donut existe (foi spawnado)
+            if (donutVerde) {
+                const distancia = Phaser.Math.Distance.Between(donutVerde.x, donutVerde.y, this.xVerde, 737);
+                //Se a
+                if (distancia <= 50) {
+                    // Deleta o donut
 
 musicas:
     Coasting - Darren Korb;
